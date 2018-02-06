@@ -1,10 +1,22 @@
-Hello
+Mafia
 
-Character
+
+Key: Class = C, Object = O
+
+Game ~ C
 	Attributes:
-		- Role
-		- Abilities
-		- (Teams)
+		- State O (Class State)
+
+
+Character ~ C
+	Attributes:
+		- Role ~ O ~ Role Class
+			- Abilities
+			- Teams
+		- Name
 	Methods:
-		- 
+		- getters/setters (e.g getName, getRole etc)
+		-
 State
+
+Objects:
