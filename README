@@ -12,8 +12,9 @@ Game ~ C
 		- Generate Players
 		- Game loop (until win condition met, while)
 			- Day Round[i]
+				- Actions taken (useAbility)
 			- Night Round[i]
-
+				- Actions taken
 Character ~ C
 	Attributes:
 		- Role ~ O ~ Role Class
