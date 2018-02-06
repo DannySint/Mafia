@@ -16,10 +16,15 @@ public class Game {
 			players[i] = new Player();
 		}
 		
-		//Run numberPlayers / 3 times
-		cultPerson = (int)(Math.random() * 3);
+		//Run numberPlayers / 1 time
+		cultPerson = (int)(Math.random() * numPlayers);
 		players[cultPerson].setRole(Role.CULT);
-		System.out.println("Person " + cultPerson + " is cult");
+		
+		for (int i = 0; i<numPlayers;i++)
+		{
+			System.out.println("Person " + i + " is " + players[i].getRole());
+		}
+		
 		
 		
 		/*for (int i = 0; i<(numPlayers/3); i++)
