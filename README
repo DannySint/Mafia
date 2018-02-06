@@ -1,1 +1,10 @@
 Hello
+
+Character
+	Attributes:
+		- Role
+		- Abilities
+		- (Teams)
+	Methods:
+		- 
+State
