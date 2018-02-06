@@ -8,11 +8,12 @@ Game ~ C
 		- State O (Class State, round)
 		- Players (List of players)
 			- Character ~ O ~ Character Class
+		- Interface
 	Methods:
 		- Generate Players
 		- Game loop (until win condition met, while)
-			- Day Round[i]
-				- Actions taken (useAbility)
+			- Day Round[i] - use interface
+				- Actions taken (useAbility) 
 				- 30 second clock
 			- Night Round[i]
 				- Actions taken
@@ -32,7 +33,7 @@ State ~ C
 Attributes:
 	-Time
 		- currentRound
-		- Day
+		- Day - use interface
 		- Night
 	- Health
 		- Dead
