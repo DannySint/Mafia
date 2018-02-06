@@ -25,8 +25,6 @@ public class Game {
 			System.out.println("Person " + i + " is " + players[i].getRole());
 		}
 		
-		
-		
 		/*for (int i = 0; i<(numPlayers/3); i++)
 		{
 			
