@@ -5,9 +5,23 @@ Key: Class = C, Object = O
 
 Game ~ C
 	Attributes:
-		- State O (Class State)
+		- State O (Class State, round)
+			-Time
+				- currentRound
+				- Day
+				- Night
+			- Health
+				- Dead
+				- Alive
+				- Poisoned
 		- Players (List of players)
 			- Character ~ O ~ Character Class
+	Methods:
+		- Generate Players
+		- Game loop (until win condition met, while)
+			- Day Round[i]
+			- Night Round[i]
+
 
 Character ~ C
 	Attributes:
@@ -15,9 +29,30 @@ Character ~ C
 			- Abilities
 			- Teams
 		- Name
+		- Player State
 	Methods:
-		- getters/setters (e.g getName, getRole etc)
-		-
-State
+		- getters/setters (e.g getName, getRole etc) - private
+		- useAbility
 
-Objects:
+State ~ C
+
+
+Role ~ C
+	Attributes:
+		Abilities (List of abilities)
+			- Passive
+			- Active
+			- Timeframe
+		Team
+
+Team ~ Class
+	Attributes:
+		- Win Condition
+		- Name (ENUM)
+
+Ability ~ C
+	Attributes:
+		- Name
+		- Passive
+		- Active
+		- Timeframe
