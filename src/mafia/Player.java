@@ -10,6 +10,7 @@ public class Player
 	public Player()
 	{
 		count++;
+		this.role = Role.BLUE;
 	}
 	public Player(Role r)
 	{
