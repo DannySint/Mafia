@@ -6,7 +6,8 @@ Key: Class = C, Object = O
 Game ~ C
 	Attributes:
 		- State O (Class State)
-
+		- Players (List of players)
+			- Character ~ O ~ Character Class
 
 Character ~ C
 	Attributes:
