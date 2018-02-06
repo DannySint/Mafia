@@ -11,10 +11,15 @@ public class Game {
 		
 		Player players[] = new Player[5];
 		
-		//Run numberPlayers / 3 times 
-		for (int i = 0; i<(numPlayers/3); i++)
+		//Run numberPlayers / 3 times
+		cultPerson = (int)(Math.random() * 3);
+		players[cultPerson].setRole(Role.CULT);
+		System.out.println("Person " + cultPerson + "is cult");
+		
+		
+		/*for (int i = 0; i<(numPlayers/3); i++)
 		{
-			cultPerson = (int)(Math.random() * 3);
+			
 			if (players[cultPerson].getRole() == Role.CULT)
 		    //Reject and make a new person CULT
 			{
@@ -25,7 +30,7 @@ public class Game {
 			{
 				players[i].setRole(Role.CULT);
 			}
-			System.out.println("Person " + i + "is cult");
 		}
+		*/
 	}
 }
