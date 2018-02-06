@@ -13,8 +13,10 @@ Game ~ C
 		- Game loop (until win condition met, while)
 			- Day Round[i]
 				- Actions taken (useAbility)
+				- 30 second clock
 			- Night Round[i]
 				- Actions taken
+				- 15 second clock
 Character ~ C
 	Attributes:
 		- Role ~ O ~ Role Class
