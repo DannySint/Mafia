@@ -1,16 +1,17 @@
 package mafia;
 
-enum Team {	CULT, BLUE };
+enum ETeam { CULT, BLUE };
 
 public class Team 
 {
-	private Team team;
+	private ETeam team;
 	private static int blueNumber;
 	private static int cultNumber;
 	
 	
 	Team()
 	{
+		
 	}
 	
 	public int getBlueNumber() {return blueNumber;}
