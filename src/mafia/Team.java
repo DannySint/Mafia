@@ -2,7 +2,8 @@ package mafia;
 
 enum Team {	CULT, BLUE };
 
-public class Team {
+public class Team 
+{
 	private Team team;
 	private static int blueNumber;
 	private static int cultNumber;
