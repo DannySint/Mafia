@@ -4,39 +4,39 @@ public class Game {
 
 	public static void main(String[] args) 
 	{
-		//Method to create players and assign them roles
-		int numPlayers = 5;
+		//Method to create characters and assign them roles
+		int numCharacters = 5;
 		int cultCount = 0;
-		int cultPerson = 0;
+		int cultCharacter = 0;
 		
-		Player players[] = new Player[numPlayers];
+		Characters characters[] = new Characters[numCharacters];
 		
-		for (int i = 0 ; i<numPlayers;i++)
+		for (int i = 0 ; i<numCharacters;i++)
 		{
-			players[i] = new Player();
+			characters[i] = new Characters();
 		}
 		
 		//Run numberPlayers / 1 time
-		cultPerson = (int)(Math.random() * numPlayers);
-		players[cultPerson].setRole(Role.CULT);
+		cultCharacter = (int)(Math.random() * numCharacters);
+		characters[cultCharacter].setTeam(Team.CULT);
 		
-		for (int i = 0; i<numPlayers;i++)
+		for (int i = 0; i<numCharacters;i++)
 		{
-			System.out.println("Person " + i + " is " + players[i].getRole());
+			System.out.println("Character " + i + " is " + characters[i].getTeam());
 		}
 		
-		/*for (int i = 0; i<(numPlayers/3); i++)
+		/*for (int i = 0; i<(numCharacter/3); i++)
 		{
 			
-			if (players[cultPerson].getRole() == Role.CULT)
-		    //Reject and make a new person CULT
+			if (characters[cultPerson].getRole() == Role.CULT)
+		    //Reject and make a new character CULT
 			{
 				i--;
 			}
 			//Make cult
 			else
 			{
-				players[i].setRole(Role.CULT);
+				characters[i].setRole(Role.CULT);
 			}
 		}
 		*/
