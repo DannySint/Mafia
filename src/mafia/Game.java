@@ -13,16 +13,16 @@ public class Game {
 		
 		for (int i = 0 ; i<numCharacters;i++)
 		{
-			characters[i] = new Characters();
-		}
+			characters[i] = new Characters("Danny", "Alive", true);
+			}
 		
 		//Run numberPlayers / 1 time
 		cultCharacter = (int)(Math.random() * numCharacters);
-		characters[cultCharacter].setTeam(Team.CULT);
+		//characters[cultCharacter].setTeam(Team.CULT);
 		
 		for (int i = 0; i<numCharacters;i++)
 		{
-			System.out.println("Character " + i + " is " + characters[i].getTeam());
+			//System.out.println("Character " + i + " is " + characters[i].getTeam());
 		}
 		
 		/*for (int i = 0; i<(numCharacter/3); i++)
