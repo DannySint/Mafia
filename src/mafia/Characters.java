@@ -36,6 +36,8 @@ public class Characters
 	//Setter Methods
 	public void setName(String name) {this.name = name;}
 	public void setPlayerState(String playerState) {this.playerState = playerState;}
+	public void setRoleCult() {role.setRoleCult();}
+	public void setRoleBlue() {role.setRoleBlue();}
 	
 	//Ability method
 	/* 

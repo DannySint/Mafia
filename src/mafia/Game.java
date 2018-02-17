@@ -7,7 +7,7 @@ public class Game {
 		//Method to create characters and assign them roles
 		int numCharacters = 5;
 		int cultCount = 0;
-		int cultCharacter = 0;
+		int cultCharacter = 2;
 		
 		Characters characters[] = new Characters[numCharacters];
 		
@@ -20,9 +20,12 @@ public class Game {
 		cultCharacter = (int)(Math.random() * numCharacters);
 		//characters[cultCharacter].setTeam(Team.CULT);
 		
+		Characters[] players = new Characters[numCharacters];
 		for (int i = 0; i<numCharacters;i++)
 		{
-			//System.out.println("Character " + i + " is " + characters[i].getTeam());
+			players[i] = new Characters("Danny","Alive",false);
+			if (i == cultCharacter) {players[i].setRoleCult();}
+			System.out.println("Character " + i + " is " + players[i].getRole());
 		}
 		
 		/*for (int i = 0; i<(numCharacter/3); i++)
