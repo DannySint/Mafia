@@ -1,0 +1,61 @@
+Mafia
+
+
+Key: Class = C, Object = O
+
+Game ~ C
+	Attributes:
+		- State O (Class State, round)
+		- Players (List of players)
+			- Character ~ O ~ Character Class
+		- Interface
+	Methods:
+		- Generate Players
+		- Game loop (until win condition met, while)
+			- Day Round[i] - use interface
+				- Actions taken (useAbility) 
+				- 30 second clock
+			- Night Round[i]
+				- Actions taken
+				- 15 second clock
+Character ~ C
+	Attributes:
+		- Role ~ O ~ Role Class
+			- Abilities
+			- Teams
+		- Name
+		- Player State
+	Methods:
+		- getters/setters (e.g getName, getRole etc) - private
+		- useAbility
+
+State ~ C
+Attributes:
+	-Time
+		- currentRound
+		- Day - use interface
+		- Night
+	- Health
+		- Dead
+		- Alive
+		- Poisoned
+
+Role ~ C
+	Attributes:
+		Abilities (List of abilities)
+			- Passive
+			- Active
+			- Timeframe
+		Team
+
+Team ~ Class
+	Attributes:
+		- Win Condition
+		- Name (ENUM)
+
+Ability ~ C
+	Attributes:
+		- Name
+		- Passive
+		- Active
+		- Timeframe
