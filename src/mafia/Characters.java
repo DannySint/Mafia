@@ -41,7 +41,7 @@ public class Characters
 	/* 
 	 * 
 	 */
-	public boolean kill(Characters character) {character.setPlayerState("Dead"); return true;}
+	public boolean kill(Characters character) {character.setPlayerState("Dead"); return true;} //should be in Ability.java :( 
 	
 	public static void main(String[] args)
 	{
