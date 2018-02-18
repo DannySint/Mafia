@@ -13,9 +13,9 @@ public class Characters
 	private static int count = 0;
 	/**
 	 * Characters constructor method
-	 * @param name = Name of player
-	 * @param playerState = Alive or Dead?
-	 * @param cultFlag = Whether the person being created is a cult member
+	 * @param name = String - name of player
+	 * @param PlayerState = enum - Alive or Dead?
+	 * @param cultFlag = Boolean - Whether the person being created is a cult member
 	 */
 	public Characters(String name, PlayerState playerState, boolean cultFlag)
 	{
@@ -41,17 +41,8 @@ public class Characters
 	public void setRoleCult() {role.setRoleCult();}
 	public void setRoleBlue() {role.setRoleBlue();}
 	
-	
-	//Ability method
-	/* 
-	 * 
-	 */
-	public boolean kill(Characters character) {character.setPlayerState(PlayerState.DEAD); return true;} //should be in Ability.java :( 
-	
 	public static void main(String[] args)
 	{
-		//Characters[] characters = new Characters[3];
-		//characters[0].getRole();
 		Characters character1 = new Characters("Danny", PlayerState.ALIVE, false);
 		Characters character2 = new Characters("Jacky", PlayerState.ALIVE, false);
 		//character1.role.setRoleCult();

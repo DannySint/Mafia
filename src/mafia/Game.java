@@ -2,23 +2,45 @@ package mafia;
 
 public class Game {
 
-	public static void main(String[] args) 
+	private static String gameEnd(Characters[] players)
+	{
+		int cultNumber = 0, blueNumber = 0;
+		for (int i=0;i<players.length;i++)
+		{
+			//Test how many players there are alive
+			switch (players[i].getRole().getTeam().getTeam())
+			{
+				case CULT : 
+				{
+					if (players[i].getPlayerstate() == PlayerState.ALIVE) 
+					{
+						cultNumber++; break;
+					} 
+					else {break;}
+				}
+				case BLUE : blueNumber++; break;
+			}
+			
+			//1 cult and 1 player
+			if (cultNumber == 1 && (blueNumber == 1 || blueNumber == 0))
+			{
+				return "Cult";
+			}
+			if (cultNumber == 0)
+			{
+				return "Blue";
+			}
+		}
+		return "No";
+	}
+	public static void main(String[] args) throws InterruptedException 
 	{
 		//Method to create characters and assign them roles
 		int numCharacters = 5;
 		int cultCount = 0;
 		int cultCharacter = 2;
 		
-		Characters characters[] = new Characters[numCharacters];
-		
-		for (int i = 0 ; i<numCharacters;i++)
-		{
-			characters[i] = new Characters("Danny", PlayerState.ALIVE, true);
-			}
-		
-		//Run numberPlayers / 1 time
 		cultCharacter = (int)(Math.random() * numCharacters);
-		//characters[cultCharacter].setTeam(Team.CULT);
 		
 		Characters[] players = new Characters[numCharacters];
 		for (int i = 0; i<numCharacters;i++)
@@ -27,6 +49,22 @@ public class Game {
 			if (i == cultCharacter) {players[i].setRoleCult();}
 			System.out.println("Character " + i + " is " + players[i].getRole());
 		}
+		
+		//Game loop
+		while ((gameEnd(players)) == "No")
+		{
+			
+		}
+		
+		if (gameEnd(players) == "Blue")
+		{
+			System.out.println("Blue team won! Congratulations");
+		}
+		if (gameEnd(players) == "Cult")
+		{
+			System.out.println("Cult won! You're all noobs");
+		}
+		Thread.sleep(10000);
 		
 		/*for (int i = 0; i<(numCharacter/3); i++)
 		{

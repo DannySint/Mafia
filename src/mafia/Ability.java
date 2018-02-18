@@ -33,9 +33,15 @@ public class Ability
 	public String toString() {return ("Name: " + name + " Passive: " + passive + " Active: " + active + " Timeframe: " + timeframe);}
  	
 	//Cult abilities
-	public boolean kill(Characters character)
+	public boolean kill(Characters character) //kill ability
 	{
-		if (character.getRole().getAbility().getPassive() == "Immune") {return false;}
+		if (character.getRole().getAbility().getPassive() == "nightDeathImmunity") {return false;}
+		else {return true;}
+	}
+	
+	public boolean poison(Characters character) //poison ability
+	{
+		if (character.getRole().getAbility().getPassive() == "poisonImmunity") {return false;}
 		else {return true;}
 	}
 }
