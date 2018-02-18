@@ -35,7 +35,7 @@ public class Ability
 	//Cult abilities
 	public boolean kill(Characters character)
 	{
-		this.kill(character);
-		return true;
+		if (character.getRole().getAbility().getPassive() == "Immune") {return false;}
+		else {return true;}
 	}
 }

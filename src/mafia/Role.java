@@ -19,7 +19,7 @@ public class Role {
 	public boolean setRoleCult() //THE ONLY METHOD TO SET ROLE - otherwise counting chars fucks up 
 	{
 		//if (team.getTeam() == ETeam.CULT){return false;}else{
-		ability = new Ability("Kill","P1","A1",2); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0); 
+		ability = new Ability("Kill","Immune","A1",2); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0); 
 		team.setTeam(ETeam.CULT);
 		return true;//}
 	}
