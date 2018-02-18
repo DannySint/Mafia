@@ -13,7 +13,7 @@ public class Game {
 		
 		for (int i = 0 ; i<numCharacters;i++)
 		{
-			characters[i] = new Characters("Danny", "Alive", true);
+			characters[i] = new Characters("Danny", PlayerState.ALIVE, true);
 			}
 		
 		//Run numberPlayers / 1 time
@@ -23,7 +23,7 @@ public class Game {
 		Characters[] players = new Characters[numCharacters];
 		for (int i = 0; i<numCharacters;i++)
 		{
-			players[i] = new Characters("Danny","Alive",false);
+			players[i] = new Characters("Danny",PlayerState.ALIVE,false);
 			if (i == cultCharacter) {players[i].setRoleCult();}
 			System.out.println("Character " + i + " is " + players[i].getRole());
 		}
