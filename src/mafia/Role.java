@@ -19,14 +19,20 @@ public class Role {
 	public boolean setRoleCult() //THE ONLY METHOD TO SET ROLE - otherwise counting chars fucks up 
 	{
 		//if (team.getTeam() == ETeam.CULT){return false;}else{
-		ability = new Ability("Kill","nightDeathImmunity","A1",2); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0); 
 		team.setTeam(ETeam.CULT);
+		ability = new Ability("KILL","nightDeathImmunity","Kill",2); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0); 
 		return true;//}
 	}
 	public void setRoleBlue() 
 	{
 		team.setTeam(ETeam.BLUE);
 		ability = new Ability(zero , zero , zero , 0);
+	}
+	public boolean setRoleInvestigator() //THE ONLY METHOD TO SET ROLE - otherwise counting chars fucks up 
+	{
+		team.setTeam(ETeam.BLUE);
+		ability = new Ability("INVESTIGATE","0","Investigate",0); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0); 
+		return true;
 	}
 	public Team getTeam() {return this.team;}
 	public Ability getAbility() {return this.ability;}

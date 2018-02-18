@@ -40,6 +40,7 @@ public class Characters
 	public void setPlayerState(PlayerState playerState) {this.playerState = playerState;}
 	public void setRoleCult() {role.setRoleCult();}
 	public void setRoleBlue() {role.setRoleBlue();}
+	public void setRoleInvestigator() {role.setRoleInvestigator();}
 	
 	public static void main(String[] args)
 	{
