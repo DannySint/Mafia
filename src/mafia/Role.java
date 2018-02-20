@@ -4,7 +4,9 @@ public class Role {
 	
 	//object variables
 	String zero = "0";
-	private Ability ability = new Ability(zero, zero, zero, 0);
+	//private Ability ability = new Ability(zero, zero, zero, 0); //1 active
+	//public Ability(String name, String passive, String[] active1, String[] active2, int timeframe
+	private Ability ability = new Ability(zero, zero, zero, zero, 0);
 	private Team team = new Team();
 	
 	/**
@@ -20,18 +22,18 @@ public class Role {
 	{
 		//if (team.getTeam() == ETeam.CULT){return false;}else{
 		team.setTeam(ETeam.CULT);
-		ability = new Ability("KILL","nightDeathImmunity","Kill",2); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0); 
+		ability = new Ability("KILL","nightDeathImmunity","Kill",zero,2); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0); 
 		return true;//}
 	}
 	public void setRoleBlue() 
 	{
 		team.setTeam(ETeam.BLUE);
-		ability = new Ability(zero , zero , zero , 0);
+		ability = new Ability(zero , zero , zero, zero , 0);
 	}
 	public boolean setRoleInvestigator() //THE ONLY METHOD TO SET ROLE - otherwise counting chars fucks up 
 	{
 		team.setTeam(ETeam.BLUE);
-		ability = new Ability("INVESTIGATE	","nightDeathImmunity","Investigate",0); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0); 
+		ability = new Ability("INVESTIGATE	","nightDeathImmunity","Investigate",zero,0); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0); 
 		return true;
 	}
 	public Team getTeam() {return this.team;}

@@ -14,29 +14,30 @@ public class Game {
 		for (int i=0;i<players.length;i++)
 		{
 			//System.out.print("Character " + i + " is " + players[i].getRole());
-			System.out.print("Character " + i);
+			System.out.print(players[i].getName() + ": Character " + i + ".");
 			System.out.println(" Name: " + players[i].getName() +  ". Player State: " + players[i].getPlayerstate());
 		}
 	}
 
 	public static void main(String[] args) throws InterruptedException 
 	{
+		String[] names = {"Danny","Jack","Kirito","Asuna","Edward","Alphone","Saber","Lancer","Archer","Rider","Caster","Beserker","Assassin","Avenger"};
 		//Method to create characters and assign them roles
 		int numCharacters = 6;
-		int cultCount = 0;
 		int cultCharacter = 0;
 		int investigatorCharacter = 0;
 		
-		cultCharacter = (int)(Math.random() * numCharacters);
+		//Assign a random person with the cult.
+		//cultCharacter = (int)(Math.random() * numCharacters);
 		do
 		{
 			investigatorCharacter = (int)(Math.random() * numCharacters);
 		}
-		while (investigatorCharacter == cultCharacter);
-		Characters[] players = new Characters[numCharacters];
+		while (investigatorCharacter == cultCharacter); //do not override the cult member with the investigator
+		Characters[] players = new Characters[numCharacters]; //creates new array for players
 		for (int i = 0; i<numCharacters;i++)
 		{
-		    players[i] = new Characters("Danny",PlayerState.ALIVE,false);
+		    players[i] = new Characters(names[i],PlayerState.ALIVE,false);
 			if (i == cultCharacter) {players[i].setRoleCult();}
 			if ((i == investigatorCharacter) && players[i].getRole().getTeam().getTeam() == ETeam.BLUE) {players[i].setRoleInvestigator();}
 			//displayCharacterData(players, i);
@@ -60,14 +61,20 @@ public class Game {
 				{
 					do 
 					{
-						System.out.println("\nPlayer: " + i + ". Your active abilities are: " + players[i].getRole().getAbility().getActive());
-						System.out.println("Which ability would you like to use?");
+						System.out.print("\nPlayer: " + i + ". Your active abilities are: ");
+						for (int j=0;j<players[i].getRole().getAbility().getTotalActives();j++)
+						{
+							 System.out.print(players[i].getRole().getAbility().getActives(j) + ", ");
+						}
+						System.out.println("\nWhich ability would you like to use?");
 						input = scanner.next();
 						switch(input)
 						{
 						case "Kill" : //currently immediately kills. Needs to kill at end of night.
 							{
-								if (players[i].getRole().getAbility().getActive() == "Kill") //check if user has ability
+								//if (players[i].getRole().getAbility().getActive() == "Kill") //check if user has ability
+								if (players[i].getRole().getAbility().haveActives(players, i, input)) //check if user has ability
+
 								{
 									do 
 									{
@@ -85,7 +92,8 @@ public class Game {
 							}
 						case "Investigate" : case "Inv" : 
 							{
-								if (players[i].getRole().getAbility().getActive() == "Investigate") //checks if user has ability)
+								//if (players[i].getRole().getAbility().getActive() == "Investigate") //checks if user has ability)
+								if (players[i].getRole().getAbility().haveActives(players,i,input)) //checks if user has ability)
 								{
 									input = "Investigate";
 									do
@@ -105,9 +113,9 @@ public class Game {
 						default :
 							{break;}
 						}
-						if (!(input.equals(players[i].getRole().getAbility().getActive()))) 
+						if (!((players[i].getRole().getAbility().haveActives(players,i,input)))) 
 							{System.out.println("That is not a valid ability. Please try again.");}
-					} while (!(input.equals(players[i].getRole().getAbility().getActive())));
+					} while (!(players[i].getRole().getAbility().haveActives(players,i,input)));
 				}
 			}
 		}
