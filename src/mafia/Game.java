@@ -61,18 +61,29 @@ public class Game {
 				{
 					do 
 					{
+						System.out.print("\nPlayer: " + i + ". Your passive abilities are: ");
+						for (int j=0;j<players[i].getRole().getAbility().getTotalPassives();j++)
+						{
+							
+							System.out.print(players[i].getRole().getAbility().getPassives(j));
+							if (players[i].getRole().getAbility().getPassives(j) == "0" || (players[i].getRole().getAbility().getPassives(j) == "")) {break;} //stops printing abilities if ability is 0 (nothing)
+							System.out.print(", ");
+						}
 						System.out.print("\nPlayer: " + i + ". Your active abilities are: ");
 						for (int j=0;j<players[i].getRole().getAbility().getTotalActives();j++)
 						{
-							 System.out.print(players[i].getRole().getAbility().getActives(j) + ", ");
+							
+							System.out.print(players[i].getRole().getAbility().getActives(j));
+							if (players[i].getRole().getAbility().getActives(j) == "0") {break;} //stops printing abilities if ability is 0 (nothing)
+							System.out.print(", ");
 						}
+						 
 						System.out.println("\nWhich ability would you like to use?");
 						input = scanner.next();
 						switch(input)
 						{
 						case "Kill" : //currently immediately kills. Needs to kill at end of night.
 							{
-								//if (players[i].getRole().getAbility().getActive() == "Kill") //check if user has ability
 								if (players[i].getRole().getAbility().haveActives(players, i, input)) //check if user has ability
 
 								{
@@ -92,7 +103,6 @@ public class Game {
 							}
 						case "Investigate" : case "Inv" : 
 							{
-								//if (players[i].getRole().getAbility().getActive() == "Investigate") //checks if user has ability)
 								if (players[i].getRole().getAbility().haveActives(players,i,input)) //checks if user has ability)
 								{
 									input = "Investigate";

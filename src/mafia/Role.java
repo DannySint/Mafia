@@ -2,28 +2,16 @@ package mafia;
 
 public class Role {
 	
-	//object variables
-	String zero = "0";
-	//private Ability ability = new Ability(zero, zero, zero, 0); //1 active
-	//public Ability(String name, String passive, String[] active1, String[] active2, int timeframe
+	//instance variables
+	String zero = "0"; //placeholder for "no ability selected"
 	private Ability ability = new Ability(zero, zero, zero, zero, 0);
 	private Team team = new Team();
 	
-	/**
-	 * Constructor method for Role class.
-	 */
-	public Role()
-	{
-		//ability = new Ability("Kill","P1","A1",2);
-		//team = new Team();
-		//this.setRoleBlue();
-	}
 	public boolean setRoleCult() //THE ONLY METHOD TO SET ROLE - otherwise counting chars fucks up 
 	{
-		//if (team.getTeam() == ETeam.CULT){return false;}else{
 		team.setTeam(ETeam.CULT);
-		ability = new Ability("KILL","nightDeathImmunity","Kill",zero,2); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0); 
-		return true;//}
+		ability = new Ability("KILL","nightDeathImmunity","Kill",zero,2); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0);
+		return true;
 	}
 	public void setRoleBlue() 
 	{
@@ -39,6 +27,22 @@ public class Role {
 	public Team getTeam() {return this.team;}
 	public Ability getAbility() {return this.ability;}
 	public String toString() {return ("Team: " + team + "\nName: " + ability.getName() + ". Passive: "+ ability.getPassive() + ". Active: " + ability.getActive() + ". Timeframe: "+ ability.getTimeframe());}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public static void main(String[] args)
 	{

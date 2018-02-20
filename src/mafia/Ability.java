@@ -3,11 +3,12 @@ package mafia;
 public class Ability 
 {
 	private String name;
+	private int totalPassives;
 	private String passive;
 	private int totalActives;
 	private String active;
-	//private String[] actives;
 	private String[] actives = new String[2];
+	private String[] passives = new String[2];
 	private int timeframe;
 	private int uses;
 	
@@ -18,25 +19,54 @@ public class Ability
 	 * @param active
 	 * @param timeframe
 	 */
-	//public Ability(String name, String passive, String active, int timeframe, int i)
+	//public Ability(String name, String passive, String active, int timeframe, int i) //single active constructor - no longer used
 	//{this.name=name;this.passive=passive;this.active=active;this.timeframe=timeframe;}
 	
-	public Ability(String name, String passive, String active1, String active2, int timeframe) //2 actives constructor
-	{this.name=name;this.passive=passive;
-	this.totalActives = 2;
-	this.actives[0] = active1;
-	this.actives[1] = active2;
-	this.timeframe=timeframe;}
+	/*public Ability(String name, String passive, String active1, String active2, int timeframe) //2 actives constructor 1 passive
+	{
+		this.name=name;
+		this.passive=passive;
+		this.totalActives = 2;
+		this.actives[0] = active1;
+		this.actives[1] = active2;
+		this.timeframe=timeframe;
+	}*/
+	
+	public Ability(String name, String passive1, String active1, String active2, int timeframe) //2 actives constructor 1 passive
+	{
+		this.name=name;
+		this.totalPassives = 1;
+		this.passives[0]=passive1;
+		this.totalActives = 2;
+		this.actives[0] = active1;
+		this.actives[1] = active2;
+		this.timeframe=timeframe;
+	}
+	
+	public Ability(String name, String passive1, String passive2, String active1, String active2, int timeframe) //2 actives constructor 2 passives
+	{
+		this.name=name;
+		this.totalPassives = 2;
+		this.passives[0]=passive1;
+		this.passives[1]=passive2;
+		this.totalActives = 2;
+		this.actives[0] = active1;
+		this.actives[1] = active2;
+		this.timeframe=timeframe;
+	}
+	
 	
 	//Getter methods
 	public String getName() {return name;}
-	public String getPassive() {return passive;}
-	//public String getActive() {return active;}
+	//public String getPassive() {return passive;} //unused
+	public String[] getPassive() {return passives;}
+	public String getPassives(int i) 
+		{return passives[i];}
+	public int getTotalPassives() {return totalPassives;}
+	//public String getActive() {return active;} //unused
 	public String[] getActive() {return actives;}
 	public String getActives(int i) 
-	{
-		return actives[i];
-	}
+		{return actives[i];}
 	public int getTotalActives() {return totalActives;}
 	public int getTimeframe() {return timeframe;}
 	public int getUses() {return uses;}
@@ -44,6 +74,7 @@ public class Ability
 	//Setter methods
 	public void setName(String name) {this.name=name;}
 	public void setPassive(String passive) {this.passive=passive;}
+	public void setPassives(String passives, int Num) {this.passives[Num] = passives;}
 	public void setActive(String active) {this.active=active;}
 	public void setActives(String actives, int Num) {this.actives[Num] = actives;}
 	public void setTimeFrame(int timeframe) {this.timeframe=timeframe;}
@@ -52,7 +83,7 @@ public class Ability
 	
 	//toString method
 	public String toString() {return ("Name: " + name + " Passive: " + passive + " Active: " + active + " Timeframe: " + timeframe);}
- 	
+	
 	//Ability existence check
 	public boolean haveActives(Characters[] players, int i, String input)
 	{
@@ -77,8 +108,14 @@ public class Ability
 	//Kill ability
 	public boolean kill(Characters[] players, int i, int inputInt)
 	{
-		if (players[inputInt].getRole().getAbility().getPassive() == "nightDeathImmunity") {return false;}
-		else {return true;}
+		for (int j=0;j<this.getTotalPassives();j++) 
+		{
+			if (players[inputInt].getRole().getAbility().getPassives(j) == "nightDeathImmunity") {return false;}
+		}
+		//if (players[inputInt].getRole().getAbility().getPassives(0) == "nightDeathImmunity") {return false;}
+		//if (players[inputInt].getRole().getAbility().getPassives(1) == "nightDeathImmunity") {return false;}
+		//if (players[inputInt].getRole().getAbility().getPassive() == "nightDeathImmunity") {return false;}
+		return true;
 	}
 	
 	//Investigate ability
@@ -88,10 +125,13 @@ public class Ability
 		else {return false;}
 	}
 
-	public boolean poison(Characters character) //poison ability
+	public boolean poison(Characters[] players, int i, int inputInt) //poison ability
 	{
-		if (character.getRole().getAbility().getPassive() == "poisonImmunity") {return false;}
-		else {return true;}
+		for (int j=0;j<this.getTotalPassives();j++) 
+		{
+			if (players[inputInt].getRole().getAbility().getPassives(j) == "nightDeathImmunity") {return false;}
+		}
+		return true;
 	}
 	
 	/*Code that was in Game.java
