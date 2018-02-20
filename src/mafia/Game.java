@@ -28,7 +28,7 @@ public class Game {
 		int investigatorCharacter = 0;
 		
 		//Assign a random person with the cult.
-		//cultCharacter = (int)(Math.random() * numCharacters);
+		cultCharacter = (int)(Math.random() * numCharacters);
 		do
 		{
 			investigatorCharacter = (int)(Math.random() * numCharacters);
@@ -85,7 +85,7 @@ public class Game {
 									//actual killing done here
 									if (players[i].getRole().getAbility().kill(players, i, inputInt))
 										{players[inputInt].setPlayerState(PlayerState.DEAD);}
-									else {System.out.println("Player " + i + " was immune to your attack");}
+									else {System.out.println("Player " + inputInt + " was immune to your attack");}
 								}
 								else {System.out.println("You do not have that ability");}
 								break;
