@@ -74,7 +74,7 @@ public class Game {
 						{
 							
 							System.out.print(players[i].getRole().getAbility().getActives(j));
-							 
+							if (players[i].getRole().getAbility().getActives(j) == "0") {break;} //stops printing abilities if ability is 0 (nothing)
 							System.out.print(", ");
 						}
 						 
