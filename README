@@ -17,7 +17,7 @@ Game ~ C
 	Attributes:
 		- State O (Class State, round)
 		- Players (List of players)
-			- Character ~ O ~ Character Class
+			- Character ~ O ~ Character Class 
 		- Interface
 	Methods:
 		- Generate Players

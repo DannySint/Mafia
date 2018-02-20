@@ -10,7 +10,7 @@ public class Characters
 	private Role role;
 	
 	//static attributes
-	private static int count = 0;
+	private static int count = 0; 
 	/**
 	 * Characters constructor method
 	 * @param name = String - name of player

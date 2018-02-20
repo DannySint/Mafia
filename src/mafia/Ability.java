@@ -31,7 +31,7 @@ public class Ability
 		this.actives[1] = active2;
 		this.timeframe=timeframe;
 	}*/
-	
+	 
 	public Ability(String name, String passive1, String active1, String active2, int timeframe) //2 actives constructor 1 passive
 	{
 		this.name=name;

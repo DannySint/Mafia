@@ -10,7 +10,7 @@ public class Role {
 	public boolean setRoleCult() //THE ONLY METHOD TO SET ROLE - otherwise counting chars fucks up 
 	{
 		team.setTeam(ETeam.CULT);
-		ability = new Ability("KILL","nightDeathImmunity","Kill",zero,2); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0);
+		ability = new Ability("KILL","nightDeathImmunity" ,"Kill",zero,2); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0);
 		return true;
 	}
 	public void setRoleBlue() 
