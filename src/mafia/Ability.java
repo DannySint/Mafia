@@ -6,6 +6,7 @@ public class Ability
 	private String passive;
 	private String active;
 	private int timeframe;
+	private int uses;
 	
 	/**
 	 * Constructor
@@ -33,11 +34,42 @@ public class Ability
 	public String toString() {return ("Name: " + name + " Passive: " + passive + " Active: " + active + " Timeframe: " + timeframe);}
  	
 	//Cult abilities
-	public boolean kill(Characters character) //kill ability
+	public boolean validate(Characters[] players, int i, int inputInt, String input) //validates check on yourself & dead people
 	{
-		if (character.getRole().getAbility().getPassive() == "nightDeathImmunity") {return false;}
+		if (i == inputInt) {System.out.println("You cannot " + input + " yourself. Please try again."); return false;}
+		if (players[inputInt].getPlayerstate() == PlayerState.DEAD) {System.out.println("You cannot " + input + " a dead person"); return false;}
+		return true;
+	}
+	public boolean kill(Characters[] players, int i, int inputInt)
+	{
+		if (players[inputInt].getRole().getAbility().getPassive() == "nightDeathImmunity") {return false;}
 		else {return true;}
 	}
+	public boolean investigate(Characters[] players, int i, int inputInt)
+	{
+		if (players[inputInt].getRole().getTeam().getTeam() == ETeam.CULT) {return true;}
+		else {return false;}
+	}
+	
+	/*Code that was in Game.java
+	if (players[i].getRole().getAbility().getActive() == "Kill")
+	{
+		do 
+		{
+			System.out.println("Which player would you like to kill?");
+			inputInt = scanner.nextInt();
+			if (i == inputInt) {System.out.println("You cannot kill yourself. Please try again.");}
+			if (players[inputInt].getPlayerstate() == PlayerState.DEAD) 
+			{
+				System.out.println("You cannot kill a dead person");
+			}
+		} while ((players[inputInt].getPlayerstate() == PlayerState.DEAD) || i == inputInt);
+		if (players[inputInt].getPlayerstate() == PlayerState.DEAD) 
+			{}
+		else 
+			{players[inputInt].setPlayerState(PlayerState.DEAD);}
+	}
+	else {System.out.println("You do not have that ability");}*/
 	
 	public boolean poison(Characters character) //poison ability
 	{

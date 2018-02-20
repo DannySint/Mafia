@@ -48,10 +48,7 @@ public class Characters
 		Characters character2 = new Characters("Jacky", PlayerState.ALIVE, false);
 		//character1.role.setRoleCult();
 		
-		if (character2.role.getAbility().kill(character1))
-		{
-			character1.setPlayerState(PlayerState.DEAD);
-		}
+		//if (character2.role.getAbility().kill(character1)) {character1.setPlayerState(PlayerState.DEAD);}
 		
 		System.out.println("Name: " + character1.getName());
 		System.out.println("State: " + character1.getPlayerstate());

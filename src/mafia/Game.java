@@ -13,8 +13,8 @@ public class Game {
 	{
 		for (int i=0;i<players.length;i++)
 		{
-			System.out.print("Character " + i + " is " + players[i].getRole());
-			//System.out.print("Character " + i);
+			//System.out.print("Character " + i + " is " + players[i].getRole());
+			System.out.print("Character " + i);
 			System.out.println(" Name: " + players[i].getName() +  ". Player State: " + players[i].getPlayerstate());
 		}
 	}
@@ -50,11 +50,11 @@ public class Game {
 		{
 			for (int i=0;i<players.length;i++)
 			{
-				displayCharacters(players);
-				//displayCharactersData(players, i);
+				//displayCharacterData(players, i); //admin function
+				displayCharacters(players); //player function
 				if ((players[i].getPlayerstate() == PlayerState.DEAD))
 				{
-					System.out.println("Player " + i + " is dead and cannot perform any actions");
+					System.out.println("\nPlayer " + i + " is dead and cannot perform any actions");
 				}
 				else 
 				{
@@ -67,54 +67,46 @@ public class Game {
 						{
 						case "Kill" : //currently immediately kills. Needs to kill at end of night.
 							{
-								if (players[i].getRole().getAbility().getActive() == "Kill")
+								if (players[i].getRole().getAbility().getActive() == "Kill") //check if user has ability
 								{
 									do 
 									{
-										System.out.println("Which player would you like to kill?");
+										System.out.println("Which player would you like to kill?"); 
 										inputInt = scanner.nextInt();
-										if (i == inputInt) {System.out.println("You cannot kill yourself. Please try again.");}
-										if (players[inputInt].getPlayerstate() == PlayerState.DEAD) 
-										{
-											System.out.println("You cannot kill a dead person");
-										}
-									} while ((players[inputInt].getPlayerstate() == PlayerState.DEAD) || i == inputInt);
-									if (players[inputInt].getPlayerstate() == PlayerState.DEAD) 
-										{}
-									else 
+									} while (!(players[i].getRole().getAbility().validate(players, i, inputInt, input))); //Validate user's input
+									
+									//actual killing done here
+									if (players[i].getRole().getAbility().kill(players, i, inputInt))
 										{players[inputInt].setPlayerState(PlayerState.DEAD);}
+									else {System.out.println("Player " + i + " was immune to your attack");}
 								}
 								else {System.out.println("You do not have that ability");}
-							break;
+								break;
 							}
-							
 						case "Investigate" : case "Inv" : 
-						{
-							if (players[i].getRole().getAbility().getActive() == "Investigate")
 							{
-								input = "Investigate";
-								do
+								if (players[i].getRole().getAbility().getActive() == "Investigate") //checks if user has ability)
 								{
-									System.out.println("Which player would you like to investigate?");
-									inputInt = scanner.nextInt();
-									if (i == inputInt) {System.out.println("You cannot investigate yourself. Please try again.");}
-									if (players[inputInt].getPlayerstate() == PlayerState.DEAD) 
+									input = "Investigate";
+									do
 									{
-										System.out.println("You cannot investigate a dead person");
-									}
-								} while ((players[inputInt].getPlayerstate() == PlayerState.DEAD) || i == inputInt);
-								//Code for Investigate
-								if (players[inputInt].getRole().getTeam().getTeam() == ETeam.CULT) {System.out.println("Player " + inputInt + " is a member of the Cult!");}
-								else {System.out.println("Player " + inputInt + " is not a member of the Cult.");}
+										System.out.println("Which player would you like to investigate?");
+										inputInt = scanner.nextInt();
+									} while (!(players[i].getRole().getAbility().validate(players, i , inputInt, input))); //validates user's input
+									
+									//actual investigating done here
+									if (players[i].getRole().getAbility().investigate(players, i, inputInt)) //return true if member of cult
+									{System.out.println("Player " + inputInt + " is a member of the Cult!");}
+									else {System.out.println("Player " + inputInt + " is not a member of the Cult.");}
+								}
+								else {System.out.println("You do not have that ability");}
+								break;
 							}
-							else {System.out.println("You do not have that ability");}
-						break;
-						}
 						default :
 							{break;}
 						}
-						//System.out.println("Active: " + players[i].getRole().getAbility().getActive() + " input: " + input);
-						if (!(input.equals(players[i].getRole().getAbility().getActive()))) {System.out.println("That is not a valid ability. Please try again.");}
+						if (!(input.equals(players[i].getRole().getAbility().getActive()))) 
+							{System.out.println("That is not a valid ability. Please try again.");}
 					} while (!(input.equals(players[i].getRole().getAbility().getActive())));
 				}
 			}
@@ -128,7 +120,7 @@ public class Game {
 			default : {System.out.println("LUL. gameEnd somehow switched to default");}
 		}
 		Thread.sleep(1000);
-		scanner.close();
+		scanner.close();	
 	}
 	
 	private static String gameEnd(Characters[] players) //test if victory condition has been met. Upgrade by getting win conditions from Teams.java

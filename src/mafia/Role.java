@@ -31,7 +31,7 @@ public class Role {
 	public boolean setRoleInvestigator() //THE ONLY METHOD TO SET ROLE - otherwise counting chars fucks up 
 	{
 		team.setTeam(ETeam.BLUE);
-		ability = new Ability("INVESTIGATE","0","Investigate",0); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0); 
+		ability = new Ability("INVESTIGATE	","nightDeathImmunity","Investigate",0); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0); 
 		return true;
 	}
 	public Team getTeam() {return this.team;}
