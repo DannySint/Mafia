@@ -6,20 +6,18 @@ public class Game {
 
 	public static void displayCharacterData(Characters[] players, int i) //Administrative function
 	{
+		System.out.println("Character " + i + " is " + players[i].getRole().getName());
 		System.out.println("Character " + i + " is " + players[i].getRole());
-		System.out.println("Character Name: " + players[i].getName() +  " Player State: " + players[i].getPlayerstate());
+		System.out.println("Player Name: " + players[i].getName() +  ". Player State: " + players[i].getPlayerstate());
 	}
 	public static void displayCharacters(Characters[] players) //Player function
 	{
 		for (int i=0;i<players.length;i++)
 		{
-			//for (int j=0;j<)
-			System.out.println("Character " + i + " is " + players[i].getRole());
-			System.out.println("Character " + i + " is " + players[i].getRole().getAbility());
-			System.out.print(players[i].getName() + ": Character " + i + ".");
+			System.out.print(players[i].getName() + ": Player " + i + ".");
 			System.out.println(" Name: " + players[i].getName() +  ". Player State: " + players[i].getPlayerstate());
-			System.out.println();
 		}
+		System.out.println();
 	}
 
 	public static void main(String[] args) throws InterruptedException 
@@ -54,8 +52,8 @@ public class Game {
 		{
 			for (int i=0;i<players.length;i++)
 			{
-				//displayCharacterData(players, i); //admin function
-				displayCharacters(players); //player function
+				//displayCharacterData(players, i); //adminfunction
+				displayCharacters(players); //playerfunction
 				if ((players[i].getPlayerstate() == PlayerState.DEAD))
 				{
 					System.out.println("\nPlayer " + i + " is dead and cannot perform any actions");
@@ -64,6 +62,7 @@ public class Game {
 				{
 					do 
 					{
+						System.out.println("Player: " + i + ", you are: " + players[i].getRole().getName());
 						System.out.print("\nPlayer: " + i + ". Your passive abilities are: ");
 						for (int j=0;j<players[i].getRole().getAbility().getTotalPassives();j++)
 						{

@@ -2,7 +2,7 @@ package mafia;
 
 public class Ability 
 {
-	private String name;
+	//private String name;
 	private int totalPassives;
 	private String passive;
 	private int totalActives;
@@ -14,7 +14,6 @@ public class Ability
 	
 	/**
 	 * Constructor
-	 * @param name
 	 * @param passive
 	 * @param active
 	 * @param timeframe
@@ -32,9 +31,8 @@ public class Ability
 		this.timeframe=timeframe;
 	}*/
 	 
-	public Ability(String name, String passive1, String active1, String active2, int timeframe) //2 actives constructor 1 passive
+	public Ability(String passive1, String active1, String active2, int timeframe) //2 actives constructor 1 passive
 	{
-		this.name=name;
 		this.totalPassives = 1;
 		this.passives[0]=passive1;
 		this.totalActives = 2;
@@ -43,9 +41,8 @@ public class Ability
 		this.timeframe=timeframe;
 	}
 	
-	public Ability(String name, String passive1, String passive2, String active1, String active2, int timeframe) //2 actives constructor 2 passives
+	public Ability(String passive1, String passive2, String active1, String active2, int timeframe) //2 actives constructor 2 passives
 	{
-		this.name=name;
 		this.totalPassives = 2;
 		this.passives[0]=passive1;
 		this.passives[1]=passive2;
@@ -57,7 +54,6 @@ public class Ability
 	
 	
 	//Getter methods
-	public String getName() {return name;}
 	//public String getPassive() {return passive;} //unused
 	public String[] getPassive() {return passives;}
 	public String getPassives(int i) 
@@ -73,7 +69,6 @@ public class Ability
 	public int getUses() {return uses;}
 	
 	//Setter methods
-	public void setName(String name) {this.name=name;}
 	public void setPassive(String passive) {this.passive=passive;}
 	public void setPassives(String passives, int Num) {this.passives[Num] = passives;}
 	public void setActive(String active) {this.active=active;}
@@ -83,7 +78,7 @@ public class Ability
 	public void incrementUses(int uses) {this.uses--;}
 	
 	//toString method
-	public String toString() {return ("Role Name: " + name + ". Passive1: " + passives[0] + ". Passive2: " + passives[1]  + ". Active1: " + actives[0] + ". Active2: " + actives[1] + ". Timeframe: " + timeframe);}
+	public String toString() {return ("Passive1: " + passives[0] + ". Passive2: " + passives[1]  + ". Active1: " + actives[0] + ". Active2: " + actives[1] + ". Timeframe: " + timeframe);}
 	
 	//Ability existence check
 	public boolean haveActives(Characters[] players, int i, String input)
