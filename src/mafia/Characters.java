@@ -1,12 +1,14 @@
 package mafia;
 
-enum PlayerState { ALIVE, POISONED_1, POISONED_2, POISONED_3, DEAD }
+enum PlayerState { ALIVE, ATTACKED, HEALED, DEAD }
+enum Health { HEALTHY, POISONED_1, POISONED_2, POISONED_3, }
 
 public class Characters 
 {
 	//instance attributes (Role, Abilities) 
 	private String name;
 	private PlayerState playerState;
+	private Health health;
 	private Role role;
 	
 	//static attributes
@@ -17,9 +19,11 @@ public class Characters
 	 * @param PlayerState = enum - Alive or Dead?
 	 * @param cultFlag = Boolean - Whether the person being created is a cult member
 	 */
-	public Characters(String name, PlayerState playerState, boolean cultFlag)
+    public Characters(String name, PlayerState playerState, Health health, boolean cultFlag)
 	{
 		this.name = name;
+		this.playerState = playerState;
+    	this.health = health;
 		this.role = new Role();
 		if (cultFlag) {this.role.setRoleCult();}
 		else if (!cultFlag) {this.role.setRoleBlue();}
@@ -27,25 +31,26 @@ public class Characters
 			this.role.setRoleBlue();
 			System.out.println("Error setting role");
 			}
-		this.playerState = playerState;
 		count++;	
 	}
 	//Getter Methods
 	public String getName() {return name;}
 	public PlayerState getPlayerstate() {return playerState;}
+    public Health getHealth() {return health;}
 	public Role getRole() {return role;}
 	
 	//Setter Methods
 	public void setName(String name) {this.name = name;}
 	public void setPlayerState(PlayerState playerState) {this.playerState = playerState;}
+	public void setHealth(Health health) {this.health = health;}
 	public void setRoleCult() {role.setRoleCult();}
 	public void setRoleBlue() {role.setRoleBlue();}
 	public void setRoleInvestigator() {role.setRoleInvestigator();}
 	
 	public static void main(String[] args)
 	{
-		Characters character1 = new Characters("Danny", PlayerState.ALIVE, false);
-		Characters character2 = new Characters("Jacky", PlayerState.ALIVE, false);
+		Characters character1 = new Characters("Danny", PlayerState.ALIVE, Health.HEALTHY, false);
+		Characters character2 = new Characters("Jacky", PlayerState.ALIVE, Health.HEALTHY, false);
 		//character1.role.setRoleCult();
 		
 		//if (character2.role.getAbility().kill(character1)) {character1.setPlayerState(PlayerState.DEAD);}

@@ -133,6 +133,22 @@ public class Ability
 		return true;
 	}
 	
+	public boolean heal(Characters[] players, int i, int inputInt)
+	{
+		if (players[i].getPlayerstate() == PlayerState.ATTACKED) 
+			{
+				players[i].setPlayerState(PlayerState.HEALED);
+				System.out.println("You were attacked but were healed.");
+			}
+		//Curing poison
+		if ((players[i].getHealth() == Health.POISONED_1 || players[i].getHealth() == Health.POISONED_2 || players[i].getHealth() == Health.POISONED_3)) 
+			{
+				players[i].setHealth(Health.HEALTHY);
+			System.out.println("You were cured of your poison");
+			}
+		return true;
+	}
+	
 	/*Code that was in Game.java
 	if (players[i].getRole().getAbility().getActive() == "Kill")
 	{

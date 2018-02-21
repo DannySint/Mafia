@@ -51,7 +51,7 @@ public class Game {
 		Characters[] players = new Characters[numCharacters]; //creates new array for players
 		for (int i = 0; i<numCharacters;i++)
 		{
-		    players[i] = new Characters(names[i],PlayerState.ALIVE, false);
+		    players[i] = new Characters(names[i],PlayerState.ALIVE, Health.HEALTHY, false);
 			if (i == cultCharacter) {players[i].setRoleCult();}
 			if ((i == investigatorCharacter) && players[i].getRole().getTeam().getTeam() == ETeam.BLUE) {players[i].setRoleInvestigator();}
 			//displayCharacterData(players, i);
@@ -63,6 +63,7 @@ public class Game {
 		String input = "";
 		while ((gameEnd(players)) == "No")
 		{
+			//Night Start
 			for (int i=0;i<players.length;i++)
 			{
 				//displayCharactersAdmin(players); //adminfunction
@@ -135,6 +136,24 @@ public class Game {
 								else {System.out.println("You do not have that ability");}
 								break;
 							}
+						case "Heal" : 
+						{
+							if (players[i].getRole().getAbility().haveActives(players,i,input)) //checks if user has ability)
+							{
+								do
+								{
+									System.out.println("Which player would you like to " + input + "?");
+									inputInt = scanner.nextInt();
+								} while (!(players[i].getRole().getAbility().validate(players, i , inputInt, input))); //validates user's input
+								
+								//actual healing done here
+								if (players[i].getRole().getAbility().heal(players, i, inputInt)) //return true if member of cult
+								{System.out.println("Player " + inputInt + " is a member of the Cult!");}
+								else {System.out.println("Player " + inputInt + " is not a member of the Cult.");}
+							}
+							else {System.out.println("You do not have that ability");}
+							break;
+						}
 						default :
 							{break;}
 						}
@@ -150,6 +169,13 @@ public class Game {
 					} while (!(players[i].getRole().getAbility().haveActives(players,i,input)));
 				}
 			}
+			
+			//Night End
+			for (int i=0;i<players.length;i++)
+			{
+				if (players[i].getPlayerstate() == (PlayerState.ATTACKED)) {players[i].setPlayerState(PlayerState.DEAD);}
+				if (players[i].getPlayerstate() == (PlayerState.HEALED)) {players[i].setPlayerState(PlayerState.ALIVE);}
+			}
 		}
 		
 		switch (gameEnd(players))
@@ -160,7 +186,7 @@ public class Game {
 			default : {System.out.println("LUL. gameEnd somehow switched to default");}
 		}
 		Thread.sleep(1000);
-		scanner.close();	
+		scanner.close();
 	}
 	
 	private static String gameEnd(Characters[] players) //test if victory condition has been met. Upgrade by getting win conditions from Teams.java
