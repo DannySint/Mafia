@@ -9,6 +9,7 @@ public class Ability
 	private String active;
 	private String[] actives = new String[2];
 	private String[] passives = new String[2];
+	private int priority;
 	private int timeframe;
 	private int uses;
 	
@@ -85,9 +86,11 @@ public class Ability
 	{
 		for (int activesInt=0;activesInt<actives.length;activesInt++)
 		{
-			if (players[i].getRole().getAbility().getActives(activesInt).equals(actives[activesInt])) {return true;}
+			System.out.println("ActiveInt " + activesInt);
 			System.out.println("1. " + players[i].getRole().getAbility().getActives(activesInt));
 			System.out.println("2. " + actives[activesInt]);
+			System.out.println(players[i].getRole().getAbility().getActives(activesInt).equals(actives[activesInt]));
+			if (players[i].getRole().getAbility().getActives(activesInt).equals(actives[activesInt])) {return true;}
 		}
 		return false;
 //		if (players[i].getRole().getAbility().getActive().equals(input)) {return true;} else {return false;}

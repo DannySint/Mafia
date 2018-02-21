@@ -1,9 +1,11 @@
 package mafia;
 
 import java.util.*;
+import java.awt.*;
+import javax.swing.JFrame;
 
 public class Game {
-
+	
 	public static void displayCharacterData(Characters[] players, int i) //Administrative function
 	{
 		System.out.println("Character " + i + " is " + players[i].getRole().getName());
@@ -33,9 +35,9 @@ public class Game {
 
 	public static void main(String[] args) throws InterruptedException 
 	{
-		String[] names = {"Danny","Jack","Kirito","Asuna","Edward","Alphone","Saber","Lancer","Archer","Rider","Caster","Beserker","Assassin","Avenger"};
+		String[] names = {"Danny","Jack","Kirito","Asuna","Edward","Alphone","Saber","Lancer","Archer","Rider","Caster","Beserker","Assassin","Avenger","placeholdername","placeholdername","placeholdername","placeholdername","placeholdername","placeholdername","placeholdername","placeholdername","placeholdername",};
 		//Method to create characters and assign them roles
-		int numCharacters = 6;
+		int numCharacters = 3;
 		int cultCharacter = 0;
 		int investigatorCharacter = 0;
 		
@@ -49,7 +51,7 @@ public class Game {
 		Characters[] players = new Characters[numCharacters]; //creates new array for players
 		for (int i = 0; i<numCharacters;i++)
 		{
-		    players[i] = new Characters(names[i],PlayerState.ALIVE,false);
+		    players[i] = new Characters(names[i],PlayerState.ALIVE, false);
 			if (i == cultCharacter) {players[i].setRoleCult();}
 			if ((i == investigatorCharacter) && players[i].getRole().getTeam().getTeam() == ETeam.BLUE) {players[i].setRoleInvestigator();}
 			//displayCharacterData(players, i);
@@ -137,7 +139,14 @@ public class Game {
 							{break;}
 						}
 						if (!((players[i].getRole().getAbility().haveActives(players,i,input)))) 
-							{System.out.println("That is not a valid ability. Please try again.");}
+							{
+								System.out.println("That is not a valid ability. Please try again.");
+							}
+						else 
+						{
+							System.out.println(players[i].getRole().getAbility().haveActives(players,i,input));
+							//System.out.println(System.out.println(players[i].getRole().getAbility()));
+						}
 					} while (!(players[i].getRole().getAbility().haveActives(players,i,input)));
 				}
 			}

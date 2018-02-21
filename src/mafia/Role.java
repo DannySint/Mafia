@@ -13,7 +13,7 @@ public class Role {
 		name = "Cult";
 		team.setTeam(ETeam.CULT);
 		//public Ability(String name, String passive1, String passive2, String active1, String active2, int timeframe) //2 actives constructor 2 passives
-		ability = new Ability("nightDeathImmunity", zero ,"Kill",zero,2); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0);
+		ability = new Ability("nightDeathImmunity", zero ,"Kill", zero, 2); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0);
 		return true;
 	}
 	public void setRoleBlue() 
@@ -32,7 +32,7 @@ public class Role {
 	public String getName() {return this.name;}
 	public Team getTeam() {return this.team;}
 	public Ability getAbility() {return this.ability;}
-	public String toString() {return ("Team: " + team);} //+ "\nRole: " + ability.getName() + ". Passive1: " + ability.getPassives(0) + ". Passive2: " + ability.getPassives(1) + ". Active: " + ability.getActives(0) + ". Timeframe: "+ ability.getTimeframe());}
+	public String toString() {return ("Role: " + name + "Team: " + team);} //+ "\nRole: " + ability.getName() + ". Passive1: " + ability.getPassives(0) + ". Passive2: " + ability.getPassives(1) + ". Active: " + ability.getActives(0) + ". Timeframe: "+ ability.getTimeframe());}
 	
 	
 	
