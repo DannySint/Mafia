@@ -64,7 +64,8 @@ public class Ability
 		{return passives[i];}
 	public int getTotalPassives() {return totalPassives;}
 	//public String getActive() {return active;} //unused
-	public String[] getActive() {return actives;}
+	public String[] getActive() {return actives;} //unused
+	//public String getActiveArr() {return actives;}
 	public String getActives(int i) 
 		{return actives[i];}
 	public int getTotalActives() {return totalActives;}
@@ -82,7 +83,7 @@ public class Ability
 	public void incrementUses(int uses) {this.uses--;}
 	
 	//toString method
-	public String toString() {return ("Name: " + name + " Passive: " + passive + " Active: " + active + " Timeframe: " + timeframe);}
+	public String toString() {return ("Role Name: " + name + ". Passive1: " + passives[0] + ". Passive2: " + passives[1]  + ". Active1: " + actives[0] + ". Active2: " + actives[1] + ". Timeframe: " + timeframe);}
 	
 	//Ability existence check
 	public boolean haveActives(Characters[] players, int i, String input)

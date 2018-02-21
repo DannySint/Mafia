@@ -13,9 +13,12 @@ public class Game {
 	{
 		for (int i=0;i<players.length;i++)
 		{
-			//System.out.print("Character " + i + " is " + players[i].getRole());
+			//for (int j=0;j<)
+			System.out.println("Character " + i + " is " + players[i].getRole());
+			System.out.println("Character " + i + " is " + players[i].getRole().getAbility());
 			System.out.print(players[i].getName() + ": Character " + i + ".");
 			System.out.println(" Name: " + players[i].getName() +  ". Player State: " + players[i].getPlayerstate());
+			System.out.println();
 		}
 	}
 
