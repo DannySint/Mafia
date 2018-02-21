@@ -10,11 +10,22 @@ public class Game {
 		System.out.println("Character " + i + " is " + players[i].getRole());
 		System.out.println("Player Name: " + players[i].getName() +  ". Player State: " + players[i].getPlayerstate());
 	}
+	public static void displayCharactersAdmin(Characters[] players) //Admin function
+	{
+		for (int i=0;i<players.length;i++)
+		{
+			System.out.print("Character " + i + " is: " + players[i].getRole().getName());
+			System.out.println(" on " + players[i].getRole());
+			//System.out.println("Name: " + players[i].getName() +  ". Player State: " + players[i].getPlayerstate());
+		}
+		System.out.println();
+	}
+	
 	public static void displayCharacters(Characters[] players) //Player function
 	{
 		for (int i=0;i<players.length;i++)
 		{
-			System.out.print(players[i].getName() + ": Player " + i + ".");
+			System.out.print("Player " + i + ".");
 			System.out.println(" Name: " + players[i].getName() +  ". Player State: " + players[i].getPlayerstate());
 		}
 		System.out.println();
@@ -52,7 +63,7 @@ public class Game {
 		{
 			for (int i=0;i<players.length;i++)
 			{
-				//displayCharacterData(players, i); //adminfunction
+				//displayCharactersAdmin(players); //adminfunction
 				displayCharacters(players); //playerfunction
 				if ((players[i].getPlayerstate() == PlayerState.DEAD))
 				{
