@@ -60,6 +60,7 @@ public class Game {
 		//Game loop
 		Scanner scanner = new Scanner(System.in); 
 		int inputInt = 0;
+		boolean flag;
 		String input = "";
 		while ((gameEnd(players)) == "No")
 		{
@@ -96,6 +97,7 @@ public class Game {
 						 
 						System.out.println("\nWhich ability would you like to use?");
 						input = scanner.next();
+						flag = true;
 						switch(input)
 						{
 						case "Kill" : //currently immediately kills. Needs to kill at end of night.
@@ -114,11 +116,12 @@ public class Game {
 										{players[inputInt].setPlayerState(PlayerState.DEAD);}
 									else {System.out.println("Player " + inputInt + " was immune to your attack");}
 								}
-								else {System.out.println("You do not have that ability");}
+								else {}
 								break;
 							}
 						case "Investigate" : case "Inv" : 
 							{
+								input = "Investigate";
 								if (players[i].getRole().getAbility().haveActives(players,i,input)) //checks if user has ability)
 								{
 									input = "Investigate";
@@ -133,7 +136,7 @@ public class Game {
 									{System.out.println("Player " + inputInt + " is a member of the Cult!");}
 									else {System.out.println("Player " + inputInt + " is not a member of the Cult.");}
 								}
-								else {System.out.println("You do not have that ability");}
+								else {}
 								break;
 							}
 						case "Heal" : 
@@ -151,7 +154,7 @@ public class Game {
 								{System.out.println("Player " + inputInt + " is a member of the Cult!");}
 								else {System.out.println("Player " + inputInt + " is not a member of the Cult.");}
 							}
-							else {System.out.println("You do not have that ability");}
+							else {}
 							break;
 						}
 						default :
@@ -163,8 +166,6 @@ public class Game {
 							}
 						else 
 						{
-							System.out.println(players[i].getRole().getAbility().haveActives(players,i,input));
-							//System.out.println(System.out.println(players[i].getRole().getAbility()));
 						}
 					} while (!(players[i].getRole().getAbility().haveActives(players,i,input)));
 				}

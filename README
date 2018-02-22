@@ -1,9 +1,11 @@
 ## To-do list:
-Kill at end of night
+ADD TESTING UNITS
+Kill at end of night [Sorta Done]
 				Allow multiple actives and passives [DONE]
+Fix "That is not a valid ability"
 Add day phase where one person can be exe'd
 Add win conditions directly to teams class
-Add testing units
+
 Add graphics
 Add networking features
 
