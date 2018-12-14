@@ -1,4 +1,11 @@
-## To-do list:
+# Mafia #
+
+## How  to play: ##
+
+Run Game.java to 'play' the game
+
+
+## To-do list: ##
 ADD TESTING UNITS
 Kill at end of night [Sorta Done] - Create a list of actions that need to be done.
 				Allow multiple actives and passives [DONE]
@@ -10,8 +17,7 @@ Add graphics
 Add networking features
 
 
-Mafia
-
+## Mafia Game Design ##
 
 Key: Class = C, Object = O
 
