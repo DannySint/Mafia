@@ -53,23 +53,17 @@ public class Ability
 		this.timeframe=timeframe;
 	}
 	
-	
-	//Getter methods
-	//public String getPassive() {return passive;} //unused
 	public String[] getPassive() {return passives;}
 	public String getPassives(int i) 
 		{return passives[i];}
 	public int getTotalPassives() {return totalPassives;}
-	//public String getActive() {return active;} //unused
 	public String[] getActive() {return actives;} //unused
-	//public String getActiveArr() {return actives;}
 	public String getActives(int i)
 		{return actives[i];}
 	public int getTotalActives() {return totalActives;}
 	public int getTimeframe() {return timeframe;}
 	public int getUses() {return uses;}
 	
-	//Setter methods
 	public void setPassive(String passive) {this.passive=passive;}
 	public void setPassives(String passives, int Num) {this.passives[Num] = passives;}
 	public void setActive(String active) {this.active=active;}
@@ -82,62 +76,34 @@ public class Ability
 	public String toString() {return ("Passive1: " + passives[0] + ". Passive2: " + passives[1]  + ". Active1: " + actives[0] + ". Active2: " + actives[1] + ". Timeframe: " + timeframe);}
 	
 	//Ability existence check
-	public boolean haveActives(Characters[] players, int playerID, String input)
-	{
-		for (int activesInt=0;activesInt<actives.length;activesInt++)
-		{
-			if (players[playerID].getRole().getAbility().getActives(activesInt).equals(input)) {return true;}
-		}
-		return false;
-	}
-	
-	//Abilities validation
-	public boolean validate(Characters[] players, int playerID, int inputInt, String input) //validates check on yourself & dead people
-	{
-		if (playerID == inputInt) {System.out.println("You cannot " + input + " yourself. Please try again."); return false;}
-		if (players[inputInt].getPlayerstate() == PlayerState.DEAD) {System.out.println("You cannot " + input + " a dead person"); return false;}
-		return true;
-	}
-	
-	//Kill ability
-	public boolean kill(Characters[] players, int playerID, int inputInt)
-	{
-		for (int j=0;j<this.getTotalPassives();j++) 
-		{
-			if (players[inputInt].getRole().getAbility().getPassives(j) == "nightDeathImmunity") {return false;}
-		}
-		return true;
-	}
-	
-	//Investigate ability
-	public boolean investigate(Characters[] players, int playerID, int inputInt)
-	{
-		if (players[inputInt].getRole().getTeam().getTeam() == ETeam.CULT) {return true;}
-		else {return false;}
-	}
+   public boolean haveActives(Character subject, String input)
+    {
+        for (int activesInt=0;activesInt<actives.length;activesInt++)
+        {
+            if (subject.getRole().getAbility().getActives(activesInt).equals(input)) {return true;}
+        }
+        return false;
+    }
 
-	public boolean poison(Characters[] players, int playerID, int inputInt) //poison ability
+	//Abilities validation
+	public boolean validate(Character subject, Character recipient, String action) //validates check on yourself & dead people
+	{
+		if (subject.equals(recipient)) {System.out.println("You cannot " + action + " yourself. Please try again."); return false;}
+		if (recipient.getPlayerstate() == PlayerState.DEAD) {System.out.println("You cannot " + action + " a dead person."); return false;}
+		if (!subject.getRole().getAbility().haveActives(subject, action)) {System.out.println("You do not have this action: " + action + "."); return false;}
+		return true;
+	}
+	
+
+	
+
+
+	public boolean poison(Character[] players, int playerID, int inputInt) //poison ability
 	{
 		for (int j=0;j<this.getTotalPassives();j++) 
 		{
 			if (players[inputInt].getRole().getAbility().getPassives(j) == "nightDeathImmunity") {return false;}
 		}
-		return true;
-	}
-	
-	public boolean heal(Characters[] players, int playerID, int inputInt)
-	{
-		if (players[playerID].getPlayerstate() == PlayerState.ATTACKED) 
-			{
-				players[playerID].setPlayerState(PlayerState.HEALED);
-				System.out.println("You were attacked but were healed.");
-			}
-		//Curing poison
-		if ((players[playerID].getHealth() == Health.POISONED_1 || players[playerID].getHealth() == Health.POISONED_2 || players[playerID].getHealth() == Health.POISONED_3)) 
-			{
-				players[playerID].setHealth(Health.HEALTHY);
-				System.out.println("You were cured of your poison");
-			}
 		return true;
 	}
 }
