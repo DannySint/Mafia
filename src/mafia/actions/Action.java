@@ -1,19 +1,19 @@
-package mafia;
+package mafia.actions;
 
-import java.util.Scanner;
+import mafia.Player;
 
 public abstract class Action
 {
-    private Character subject;
-    private Character recipient;
+    private Player subject;
+    private Player recipient;
     
-    public Character getSubject() {return subject;}
-    public void setSubject(Character subject) {this.subject = subject;}
+    public Player getSubject() {return subject;}
+    public void setSubject(Player subject) {this.subject = subject;}
     
-    public Character getRecipient() {return recipient;}
-    public void setRecipient(Character recipient) {this.recipient = recipient;}
+    public Player getRecipient() {return recipient;}
+    public void setRecipient(Player recipient) {this.recipient = recipient;}
     
-    public Action(Character subject, Character recipient)
+    public Action(Player subject, Player recipient)
     {
         this.subject = subject;
         this.recipient = recipient;

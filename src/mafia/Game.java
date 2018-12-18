@@ -4,7 +4,14 @@ import java.util.*;
 import java.awt.*;
 import javax.swing.JFrame;
 
-import mafia.Role.Team;
+import mafia.Team;
+import mafia.actions.Action;
+import mafia.actions.Heal;
+import mafia.actions.Investigate;
+import mafia.actions.Kill;
+import mafia.roles.Blue;
+import mafia.roles.Investigator;
+import mafia.roles.Killer;
 
 public class Game
 {
@@ -12,47 +19,55 @@ public class Game
     private int numCharacters;
     private int cultCharacter;
     private int investigatorCharacter;
-    private static String[] NAMES = { "Danny", "Jack", "Kirito", "Asuna", "Edward", "Alphone", "Saber", "Lancer", "Archer",
+    private static String[] NAMES = { "Danny", "Jack", "Kirito", "Asuna", "Edward", "Alphonse", "Saber", "Lancer", "Archer",
             "Rider", "Caster", "Beserker", "Assassin", "Avenger", "placeholdername", "placeholdername",
             "placeholdername", "placeholdername", "placeholdername", "placeholdername", "placeholdername",
             "placeholdername", "placeholdername", };
-    private Character[] players;
+    private Player[] players;
     
-    public int getNumCharacters() {return numCharacters;}
-    public void setNumCharacters(int numCharacters) {this.numCharacters = numCharacters;}
+    public int getNumCharacters() {return players.length;}
     public int getCultCharacter() {return cultCharacter;}
-    public void setCultCharacter(int cultCharacter) {this.cultCharacter = cultCharacter;}
     public int getInvestigatorCharacter() {return investigatorCharacter;}
-    public void setInvestigatorCharacter(int investigatorCharacter) {this.investigatorCharacter = investigatorCharacter;}
-    public Character[] getPlayers() {return players;}
-    public void setPlayers(Character[] players) {this.players = players;}
-        
+    public Player[] getPlayers() {return players;}
+    public void setPlayers(Player[] players) {this.players = players;}
+    
+    public Game(Player[] players) {this.players = players; numCharacters = players.length;}
+    
+    public static void main(String[] args) throws InterruptedException
+    {
+        Player[] players = new Player[3];
+        //function that sets everyone to their respective roles.
+        //game.setup();
+        players[0] = new Player("game-Danny", PlayerState.ALIVE, Health.HEALTHY, new Killer()); 
+        players[1]= new Player("game-Jack", PlayerState.ALIVE, Health.HEALTHY, new Investigator());
+        players[2] = new Player("game-Saber", PlayerState.ALIVE, Health.HEALTHY, new Blue());
+        Game game = new Game(players);
+
+        game.gameLoop();
+    }
+    
     public void setup()
     {
         // Method to create characters and assign them roles
-        setNumCharacters(3);
-        setCultCharacter(0);
-        setInvestigatorCharacter(0);
+        //setCultCharacter(0);
+        //setInvestigatorCharacter(0);
         
         // Assign a random person with the cult.
-        setCultCharacter((int) (Math.random() * getNumCharacters()));
+        int cultCharacter = ((int) (Math.random() * getNumCharacters()));
+        players[cultCharacter] = new Player("game-Cult", PlayerState.ALIVE, Health.HEALTHY, new Killer());
+        
+        int investCharacter;
         do
         {
-            setInvestigatorCharacter((int) (Math.random() * getNumCharacters()));
-        } while (getInvestigatorCharacter() == getCultCharacter()); // do not override the cult member
-                                                                              // with the investigator
-        players = new Character[getNumCharacters()]; // creates new array for players
+            investCharacter = ((int) (Math.random() * getNumCharacters()));
+        } while (getInvestigatorCharacter() == getCultCharacter()); // does not override the cult member with the investigator; creates new array for players.
+        players[investCharacter] = new Player("game-Investigator", PlayerState.ALIVE, Health.HEALTHY, new Investigator());
+        
         for (int i = 0; i < getNumCharacters(); i++)
         {
-            players[i] = new Character(NAMES[i], PlayerState.ALIVE, Health.HEALTHY, false);
-            if (i == getCultCharacter())
-            {
-                players[i].setRoleCult();
-            }
-            if ((i == getInvestigatorCharacter()) && players[i].getRole().getTeam() == Team.BLUE)
-            {
-                players[i].setRoleInvestigator();
-            }
+            //players[i] = new Player(NAMES[i], PlayerState.ALIVE, Health.HEALTHY, false);
+            if (i == cultCharacter || i == investCharacter) {}
+            else players[i] = new Player("game-Blue", PlayerState.ALIVE, Health.HEALTHY, new Blue());
             // displayCharacterData(i);
         }
     }
@@ -61,7 +76,6 @@ public class Game
     {
         // Game loop
         Scanner scanner = new Scanner(System.in);
-        int inputInt = 0;
         boolean flag;
         String action = "";
         int recipient;
@@ -83,40 +97,25 @@ public class Game
                     {
                         System.out.println("Player: " + i + ", you are: " + players[i].getRole().getName());
                         System.out.println("Player: " + i + ". Your passive abilities are: ");
-                        for (int j = 0; j < players[i].getRole().getAbility().getTotalPassives(); j++)
-                        {
-                            System.out.print(players[i].getRole().getAbility().getPassives(j));
-                            if (players[i].getRole().getAbility().getPassives(j) == "0" || (players[i].getRole().getAbility().getPassives(j) == ""))
-                            {
-                                break;
-                            } // stops printing abilities if ability is 0 (nothing)
-                            System.out.print(", ");
-                        }
+                        System.out.print(players[i].getRole().getPassives());
+                        
                         System.out.print("\nPlayer: " + i + ". Your active abilities are: ");
-                        for (int j = 0; j < players[i].getRole().getAbility().getTotalActives(); j++)
-                        { 
-
-                            System.out.print(players[i].getRole().getAbility().getActives(j));
-                            if (players[i].getRole().getAbility().getActives(j) == "0")
-                            {
-                                break;
-                            } // stops printing abilities if ability is 0 (nothing)
-                            System.out.print(", ");
-                        }
+                        System.out.print(players[i].getRole().getActives());
                         System.out.println();
                         
-                        //check's the player has the ability && the player is targeting a non-dead and not themselves 
+                        //check's the player has the ability && the player is targeting a non-dead and not themselves
                         do
                         {
                             System.out.println("Enter the ability you'd like to use followed by the target player.");
                             action = scanner.next();
                             recipient = scanner.nextInt();
                             flag = true;
-                        } while (!(players[i].getRole().getAbility().validate(players[i], players[recipient], action))); // subject 
+                        } while (!(players[i].getRole().validate(players[i], players[recipient], action)));
                         
+                        //performs action
                         switch (action)
                             {
-                            case "Kill": 
+                            case "Kill":
                             {
                                 Action kill = new Kill(players[i], players[recipient]);
                                 if (kill.actionPlayer() != null) {actions.add(kill);}
@@ -126,36 +125,36 @@ public class Game
                             {
                                 action = "Investigate";
                                 Action investigate = new Investigate(players[i], players[recipient]);
-                                if (investigate != null) {actions.add(investigate);}
+                                if (investigate.actionPlayer() != null) {actions.add(investigate);}
                                 break;
                             }
                             case "Heal":
                             {
                                 Action heal = new Heal(players[i], players[recipient]);
-                                if (heal != null) {actions.add(heal);}
+                                if (heal.actionPlayer() != null) {actions.add(heal);}
                                 break;
                             }
                             default: {
                                 break;
                             }
                             }
-                        if (!((players[i].getRole().getAbility().haveActives(players[i], action))))
+                        if (!((players[i].getRole().haveActives(action))))
                         {
                             System.out.println("That is not a valid ability. Please try again.");
-                        } else
-                        {
                         }
-                    } while (!(players[i].getRole().getAbility().haveActives(players[i], action)));
+                    } while (!(players[i].getRole().haveActives(action)));
                 }
             }
             // Night End
             
+            System.out.println();
             for (int i = 0; i < actions.size(); i++)
             {
                 System.out.println(actions.get(i));
                 //sort the actions into higher precedence first
                 actions.get(i).execute();
             }
+            System.out.println();
             
             /*
             for (int i = 0; i < players.length; i++)
@@ -191,21 +190,14 @@ public class Game
             }
             default:
             {
-                System.out.println("LUL. gameEnd somehow switched to default");
+                System.out.println("gameEnd somehow switched to default");
             }
             }
         Thread.sleep(1000);
         scanner.close();
     }
-    public static void main(String[] args) throws InterruptedException
-    {
-        Game game = new Game();
-        game.setup();
-        game.gameLoop();
-    }
 
-    private String gameEnd() // test if victory condition has been met. Upgrade by getting
-                                                       // win conditions from Teams.java
+    private String gameEnd() // test if victory condition has been met. Upgrade by getting win conditions from Teams.java
     {
         int cultNumber = 0, blueNumber = 0;
         for (int i = 0; i < players.length; i++)

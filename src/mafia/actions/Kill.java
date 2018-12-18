@@ -1,8 +1,11 @@
-package mafia;
+package mafia.actions;
+
+import mafia.Player;
+import mafia.PlayerState;
 
 public class Kill extends Action
 {   
-    public Kill(Character subject, Character recipient)
+    public Kill(Player subject, Player recipient)
     {
         super(subject, recipient);
     }
@@ -10,31 +13,21 @@ public class Kill extends Action
     public Action actionPlayer() 
     {
         Action action = null;
-
-        if (kill()) {
-            action = new Kill(getSubject(), getRecipient());
-        } else 
-        {
-            System.out.println("Player " + getRecipient().getName() + " was immune to your action");
-        }
-        
+        action = new Kill(getSubject(), getRecipient());
         return action;
-    }
-    
-    //Kill ability
-    public boolean kill()
-    {
-        for (int j=0; j < getRecipient().getRole().getAbility().getTotalPassives();j++) 
-        {
-            if (getRecipient().getRole().getAbility().getPassives(j) == "nightDeathImmunity") {return false;}
-        }
-        return true;
     }
     
     public boolean execute()
     {
-        this.getRecipient().setPlayerState(PlayerState.DEAD);
-        return true;
+        if (getRecipient().getRole().havePassives("nightDeathImmunity")) 
+        {
+            System.out.println("Player " + getRecipient().getName() + " was immune to your action");
+            return false;
+        } else 
+        {
+            this.getRecipient().setPlayerState(PlayerState.DEAD);
+            return true;
+        }
     }
     
     public String toString()

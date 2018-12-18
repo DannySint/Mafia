@@ -1,39 +1,49 @@
 package mafia;
 
-public class Role {
-	
-    enum Team { CULT, BLUE}; 
+import java.util.ArrayList;
+import java.util.EnumMap;
+
+public class Role { 
     
 	//instance variables
 	private String name;
-	private Ability ability = new Ability(zero, zero, zero, zero, 0);
+	//private Ability ability = new Ability(ZERO, ZERO, ZERO, ZERO, 0);
+	private ArrayList<AbilityPassive> passives = new ArrayList<AbilityPassive>();
+	private ArrayList<AbilityActive> actives = new ArrayList<AbilityActive>();
 	private Team team;
+
 	
 	//static variables
-	private static final String zero = "0"; //placeholder for "no ability selected"
-	private static int blueNumber;
-	private static int cultNumber;
-	private static int charactersNumber;
+	private static final String ZERO = "0"; //placeholder for "no ability selected"
 	
+	public Role(String name, ArrayList<AbilityPassive> passives, ArrayList<AbilityActive> actives, Team team)
+	{
+	    this.name = name;
+	    this.passives = passives;
+	    this.actives = actives;
+	    this.team = team;    
+	}
+	
+	/*
 	public boolean setRoleCult() 
 	{
 		this.name = "Cult";
 		this.setTeam(Team.CULT);
 		//public Ability(String name, String passive1, String passive2, String active1, String active2, int timeframe) //2 actives constructor 2 passives
-		this.ability = new Ability("nightDeathImmunity", zero ,"Kill", zero, 2); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0);
+		this.ability = new Ability("nightDeathImmunity", ZERO ,"Kill", ZERO, 2); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0);
 		return true;
 	}
 	public void setRoleBlue() 
 	{
 		this.name = "Blue Player";
 		this.setTeam(Team.BLUE);
-		this.ability = new Ability(zero , zero, zero, zero , 0);
+		this.ability = new Ability(ZERO , ZERO, ZERO, ZERO , 0);
 	}
 	public boolean setRoleInvestigator() //THE ONLY METHOD TO SET ROLE - otherwise counting chars fucks up 
 	{
 		this.name = "Investigator";
 		this.setTeam(Team.BLUE);
-		this.ability = new Ability("nightDeathImmunity", zero, "Investigate", zero, 0); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0); 
+		this.ability = new Ability("nightDeathImmunity", ZERO, "Investigate", ZERO, 0); //ability.setName(zero); ability.setPassive(zero); ability.setActive(zero); ability.setTimeFrame(0); 
 		return true;
 	}
 	
@@ -46,28 +56,57 @@ public class Role {
             case BLUE : {blueNumber++; charactersNumber++; break;}
         }
     }
+    */
+   //Ability existence check
 	
+    public boolean haveActives(String input)
+    {
+        for (int i = 0; i < actives.size(); i++)
+        {
+            if (actives.get(i).getName().equals(input)) {return true;}
+        }
+        return false;
+    }
+    public boolean havePassives(String input)
+    {
+        for (int i = 0; i < passives.size(); i++)
+        {
+            if (passives.get(i).getName().equals(input)) {return true;}
+        }
+        return false;
+    }
+    /*
+    public boolean haveActives(String input)
+    {
+        for (int activesInt = 0; activesInt < getAbility().getTotalActives(); activesInt++)
+        {
+            if (this.getAbility().getActives(activesInt).equals(input)) {return true;}
+        }
+        return false;
+    }
+   */
 	public String getName() {return this.name;}
 	public Team getTeam() {return this.team;}
-	public Ability getAbility() {return this.ability;}
-	public static int getBlueNumber() {return blueNumber;} //Need testing to ensure works correctly
-	public static int getCultNumber() {return cultNumber;} //same
-	public static int getCharactersNumber() {return charactersNumber;} //same
-	public String toString() {return ("Role: " + name + "Team: " + team);} //+ "\nRole: " + ability.getName() + ". Passive1: " + ability.getPassives(0) + ". Passive2: " + ability.getPassives(1) + ". Active: " + ability.getActives(0) + ". Timeframe: "+ ability.getTimeframe());}
 	
-	public static void main(String[] args)
-	{
-		Role test1 = new Role();
-		Role test2 = new Role();
-		Role test3 = new Role();
-		Role test4 = new Role();
-		test1.setRoleCult(); //sets test1 to cult
-		test2.setRoleBlue(); //sets test2 to blue
-		test3.setRoleBlue(); //sets test3 to blue
-		test4.setRoleBlue(); //sets test4 to blue
-		System.out.println(test1); //outputs toString method of "Team: CULT \nName: Kill. Passive: P1. Active: A2. Timeframe: 2"
-		System.out.println(test2); //outputs toString method of "Team: BLUE \nName: 0. Passive: 0. Active: 0. Timeframe: 0"
-		System.out.println("Blue Number: " + getBlueNumber()); //outputs 2
-		System.out.println("Cult Number: " + getCultNumber()); //outputs 1
-	}
+	
+	//public Ability getAbility() {return this.ability;}
+	public ArrayList<AbilityPassive> getPassives() {return passives;}
+    public void setPassives(ArrayList<AbilityPassive> passives) {this.passives = passives;}
+    public ArrayList<AbilityActive> getActives() {return actives;}
+    public void setActives(ArrayList<AbilityActive> actives) {this.actives = actives;}
+	
+    //Abilities validation
+    public boolean validate(Player subject, Player recipient, String action) //validates check on yourself & dead people
+    {
+        if (!subject.getRole().haveActives(action)) {System.out.println("You do not have this action: " + action + "."); return false;}
+        if (subject.equals(recipient)) {System.out.println("You cannot " + action + " yourself. Please try again."); return false;}
+        if (recipient.getPlayerstate() == PlayerState.DEAD) {System.out.println("You cannot " + action + " a dead person."); return false;}
+        return true;
+    }
+    
+	@Override
+    public String toString()
+    {
+        return "Role [name=" + name + ", passives=" + passives + ", actives=" + actives + ", team=" + team + "]";
+    }
 }

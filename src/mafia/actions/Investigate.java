@@ -1,22 +1,22 @@
-package mafia;
+package mafia.actions;
+
+import mafia.Player;
 
 public class Investigate extends Action
 {
 
-    public Investigate(Character subject, Character recipient) {super(subject, recipient);}
+    public Investigate(Player subject, Player recipient) {super(subject, recipient);}
 
     public Action actionPlayer()
     {
         Action action = null;
-
         action = new Investigate(getSubject(), getRecipient());
-        
         return action;
     }
 
     public boolean execute() //executes the action
     {
-        switch (this.getRecipient().getRole().getTeam()) 
+        switch (getRecipient().getRole().getTeam())
         {
             case CULT : System.out.println("Player " + this.getRecipient().getName() + " is a member of the Cult!"); break;
             case BLUE : System.out.println("Player " + this.getRecipient().getName() + " is not a member of the Cult"); break;
