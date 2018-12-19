@@ -24,6 +24,9 @@ public class AbilityActive
     @Override
     public String toString()
     {
-        return "AbilityActive [name=" + name + ", uses=" + uses + ", priority=" + priority + "]";
+        String usesStr;
+        if (uses == -1) {usesStr = "Infinite";} 
+        else {usesStr = String.valueOf(uses);}
+        return name + ", uses=" + usesStr + ", priority=" + priority;
     }
 }

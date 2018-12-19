@@ -3,9 +3,10 @@ package mafia.tests;
 import mafia.Health;
 import mafia.Player;
 import mafia.PlayerState;
-import mafia.Role;
-import mafia.roles.Investigator;
 import mafia.roles.Killer;
+import mafia.roles.Role;
+import mafia.roles.blue.Investigator;
+import mafia.roles.blue.RandomBlue;
 
 public class Tests
     {
@@ -36,23 +37,20 @@ public class Tests
             System.out.println("Name: " + character2.getName());
             System.out.println("State: " + character2.getPlayerstate());
             System.out.println("Team: " + character2.getRole().getTeam());
-            System.out.println("Ability: " + character2.getRole().getAbility());
+            System.out.println("Passives: " + character2.getRole().getPassives());
+            System.out.println("Actives: " + character2.getRole().getActives());
         }
         
         public static void role() //role class
         {
-            Role test1 = new Role();
-            Role test2 = new Role();
-            Role test3 = new Role();
-            Role test4 = new Role();
-            test1.setRoleCult(); //sets test1 to cult
-            test2.setRoleBlue(); //sets test2 to blue
-            test3.setRoleBlue(); //sets test3 to blue
-            test4.setRoleBlue(); //sets test4 to blue
+            Role test1 = new Killer();
+            Role test2 = new Investigator();
+            Role test3 = new RandomBlue();
+            Role test4 = new RandomBlue();
             System.out.println(test1); //outputs toString method of "Team: CULT \nName: Kill. Passive: P1. Active: A2. Timeframe: 2"
             System.out.println(test2); //outputs toString method of "Team: BLUE \nName: 0. Passive: 0. Active: 0. Timeframe: 0"
-            System.out.println("Blue Number: " + getBlueNumber()); //outputs 2
-            System.out.println("Cult Number: " + getCultNumber()); //outputs 1
+            System.out.println(test3);
+            System.out.println(test4);
+            
         }
-
     }

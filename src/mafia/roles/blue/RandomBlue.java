@@ -1,14 +1,12 @@
-package mafia.roles;
+package mafia.roles.blue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import mafia.AbilityActive;
 import mafia.AbilityPassive;
-import mafia.Role;
-import mafia.Team;
 
-public class Blue extends Role
+public class RandomBlue extends Blue
 {
     private static AbilityPassive passive1 = new AbilityPassive("");
     private static ArrayList<AbilityPassive> passives = new ArrayList<AbilityPassive>(Arrays.asList(passive1));
@@ -17,9 +15,8 @@ public class Blue extends Role
     private static ArrayList<AbilityActive> actives = new ArrayList<AbilityActive>(Arrays.asList(active1));
     
 
-    public Blue()
+    public RandomBlue()
     {
-        super("Blue", passives, actives, Team.BLUE);
-    }    
-
+        super("Blue", passives, actives);
+    }
 }

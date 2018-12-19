@@ -1,3 +1,3 @@
 package mafia;
 
-public enum Team { CULT, BLUE};
+public enum Team { CULT, BLUE, KILLER};

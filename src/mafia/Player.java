@@ -2,6 +2,8 @@ package mafia;
 
 import java.util.EnumMap;
 
+import mafia.roles.Role;
+
 public class Player
     {
         // instance attributes (Role, Abilities)
@@ -9,7 +11,6 @@ public class Player
         private PlayerState playerState;
         private Health health;
         private Role role;
-        private EnumMap<Team, Integer> teams = new EnumMap<>(Team.class);
 
         /**
          * Characters constructor method
@@ -24,8 +25,7 @@ public class Player
                 this.playerState = playerState;
                 this.health = health;
                 this.role = role;
-                if (teams.containsValue(role.getTeam())) {teams.replace(role.getTeam(), teams.get(role.getTeam()) + 1);} 
-                else {teams.put(role.getTeam(), 1);}
+                Game.incrementTeam(role.getTeam());
             }
 
         // Getter Methods
@@ -37,10 +37,6 @@ public class Player
         public void setName(String name) {this.name = name;}
         public void setPlayerState(PlayerState playerState) {this.playerState = playerState;}
         public void setHealth(Health health) {this.health = health;}
-        
-        public int getPlayerNumber() {return teams.size();}
-        public int getBlueNumber() {return teams.get(Team.BLUE);}
-        public int getCultNumber() {return teams.get(Team.CULT);}
         
         /*
         public void setRoleCult() {role.setRoleCult();}

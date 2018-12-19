@@ -1,4 +1,7 @@
-package mafia;
+package obseletes;
+
+import mafia.Player;
+import mafia.PlayerState;
 
 public class ObseleteAbility 
 {

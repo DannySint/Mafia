@@ -16,6 +16,6 @@ public class AbilityPassive
     @Override
     public String toString()
     {
-        return "AbilityPassive [name=" + name + "]";
+        return name;
     }
 }

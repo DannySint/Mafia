@@ -1,7 +1,7 @@
-package mafia;
+package obseletes;
 
 enum DeadTeam { CULT, BLUE };
-
+enum ETeam {CULT, BLUE };
 public class ObseleteTeam 
 {
 	private ETeam team;
